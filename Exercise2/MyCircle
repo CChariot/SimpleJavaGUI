@@ -1,0 +1,81 @@
+package geometric_configuration;
+
+import javafx.scene.canvas.GraphicsContext;
+
+/**
+ *
+ * @author Lihan Zhan
+ */
+
+public class MyCircle extends MyShape{
+    
+    double radius;
+    double perimeter;
+    double area;
+    
+    MyCircle()
+    {
+        radius = 0;
+        
+        x = 0;
+        y = 0;
+        
+        calculate();
+    }
+    
+    MyCircle(double radius , double x , double y)
+    {
+        this.x = x;
+        this.y = y;
+        
+        this.radius = radius;
+        calculate();
+    }
+    
+    double getRadius()
+    {
+        return radius;
+    }
+    
+    void setRadius(double radius)
+    {
+        this.radius = radius;
+    }
+    
+    private void calculate()
+    {
+        perimeter = 2 * 3.14 * radius;
+        area = 3.14 * radius * radius;
+    }
+    
+    @Override
+    public String toString()
+    {
+        
+        calculate();
+        
+        String desc;
+        desc = getClass().getName() + "\n" + "Radius = " + radius + "\n"
+               + "Center(x,y) = " + "(" + x + "," + y + ")";
+        
+        return desc;
+    }
+    
+    @Override
+    public void draw(GraphicsContext gc)
+    {
+        usedx1 = Math.max(usedx1, (x - radius));
+        usedx2 = Math.max(usedx2, (x + radius));
+        
+        usedy1 = Math.max(usedy1, (y - radius));
+        usedy2 = Math.max(usedy2, (y + radius));
+        
+        gc.fillOval(x - radius , y - radius , 2 * radius , 2 * radius);
+    }
+    
+    @Override
+    public MyRectangle getMyBoundingBox()
+    {
+        return new MyRectangle(x , y , 2 * radius , 2 * radius);
+    }
+}
