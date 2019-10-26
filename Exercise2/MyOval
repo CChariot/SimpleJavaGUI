@@ -1,0 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package geometric_configuration;
+
+/**
+ *
+ * @author Lihan Zhan
+ */
+
+import javafx.scene.canvas.GraphicsContext;
+
+public class MyOval extends MyShape {
+    
+    double Perimeter;
+    double Area;
+    
+    MyRectangle m;
+    
+    //Constructors for initializing the object
+    MyOval()
+    {
+        m = new MyRectangle();
+        calculate();
+    }
+    MyOval(MyRectangle m)
+    {
+        this.m = m;
+        calculate();
+    }
+    
+    private void calculate()
+    {
+        Perimeter = 2 * 3.14 * Math.sqrt((Math.pow(m.h , 2) + Math.pow(m.w  ,2)) / 2);
+        Area = 3.14 * (m.h / 2) * (m.w / 2);
+    }
+    
+     double getPerimeter()
+     {
+         return Perimeter;
+     }
+     double getArea()
+     {
+         return Area;
+     }
+     
+     //the overridden method should always be declared as public
+     @Override
+    public String toString()
+    {
+        calculate();
+        
+        String desc = getClass().getName() + "\n" + "Minor Axis = " + Double.toString((m.h / 2)) + "\n" + "Major Axis = " + Double.toString((m.w / 2))
+                + "\n" + "Perimeter = " + Double.toString(Perimeter) + "\n" + "Area = " + Double.toString(Area);
+        return desc;
+    }
+    
+    @Override
+    void draw(GraphicsContext gc)
+    {
+        usedx1 = usedx1>(x - (m.w / 2)) ? usedx1 : (x - (m.w / 2));
+        usedx2 = usedx2>(x + (m.w / 2)) ? usedx2 : (x + (m.w / 2));
+        
+        usedy1 = usedy1>(y - (m.h / 2)) ? usedy1 : (y - (m.h / 2));
+        usedy2 = usedy2>(y + (m.h / 2)) ? usedy2 : (y + (m.h / 2));
+        
+        gc.fillOval((m.x - (m.w/2)) , (m.y - (m.h/2)) , m.w , m.h);
+    }
+
+    
+    @Override
+    public MyRectangle getMyBoundingBox()
+    {
+        return m;
+    }
+}
