@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
  * @author Lihan Zhan
  */
 
+
 public class MyCircle extends MyShape{
     
     double radius;
