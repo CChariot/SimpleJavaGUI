@@ -15,7 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
- * @author Lihan Zhan
+ * @author Lihan 
  */
 
 public class Geometric_configuration extends Application{
