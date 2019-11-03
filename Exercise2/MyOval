@@ -7,7 +7,7 @@ package geometric_configuration;
 
 /**
  *
- * @author Lihan Zhan
+ * @author Lihan
  */
 
 import javafx.scene.canvas.GraphicsContext;
