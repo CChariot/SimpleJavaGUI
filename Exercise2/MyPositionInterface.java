@@ -2,7 +2,7 @@ package geometric_configuration;
 
 /**
  *
- * @author Admin
+ * @author Lihan Zhan
  */
 public interface MyShapePositionInterface extends MyPositionInterface{
     MyRectangle getMyBoundingBox();
