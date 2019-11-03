@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
- * @author Lihan 
+ * @author Lihan Zhan
 
 
 public class MyCircle extends MyShape{
