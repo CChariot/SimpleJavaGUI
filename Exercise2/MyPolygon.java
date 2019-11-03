@@ -9,7 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
- * @author Lihan Zhan
+ * @author Lihan 
  */
 public class MyPolygon extends MyShape{
     
