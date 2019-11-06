@@ -9,7 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
- * @author Lihan Zhan
+ * @author Lihan
  */
 abstract public class MyShape implements MyShapePositionInterface{
     
