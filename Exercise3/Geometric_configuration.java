@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Admin
+ * @author Lihan Zhan
  */
 
 public class Geometric_configuration extends Application{
