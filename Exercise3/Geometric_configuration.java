@@ -16,10 +16,6 @@ import javafx.stage.Stage;
 
 public class Geometric_configuration extends Application{
 
-    /**
-     * @param args the command line arguments
-     */
-    
     final double CanvasLength = 800;
     final double CanvasWidth = 800;
     
