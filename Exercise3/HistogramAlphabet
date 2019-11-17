@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package geometric_configuration;
+
+import java.io.*;
+
+/**
+ *
+ * @author Lihan Zhan
+ */
+public class HistogramAlphabet {
+    
+    private long total_alphabets = 0;
+    private long[] alphabets_no = new long[26];
+    
+    //mapping arrays
+    float[] probability = new float[26];
+    char[] alphabets = new char[26];
+    
+    //The constructor directly reads the file and computes the values for all the alphabets
+    HistogramAlphabet()
+    {
+        for(int i=97; i<=122; i++)
+        {
+            alphabets[i - 97] = (char)i;
+        }
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader("./Emma.txt"));
+            int ch;
+            while((ch = br.read()) != -1)
+            {
+                //capital
+                for(int i=65; i<=90; i++)
+                {
+                    if(ch == (char)i)
+                    {
+                        alphabets_no[i - 65]++;
+                        total_alphabets++;
+                    }
+                }
+                //non capital
+                for(int i=97; i<=122; i++)
+                {
+                    if(ch == (char)i)
+                    {
+                        alphabets_no[i - 97]++;
+                        total_alphabets++;
+                    }
+                }
+            }
+        }
+        catch(IOException io)
+        {
+            System.out.println("An Exception has occurred as follows\n" + io);
+        }
+    }
+    
+    void calculate_probability()
+    {
+        for(int i=0; i<26; i++)
+        {
+            probability[i] = (float)alphabets_no[i]/(float)total_alphabets;
+        }
+    }
+}
