@@ -7,10 +7,6 @@ package geometric_configuration;
 
 import java.io.*;
 
-/**
- *
- * @author Lihan Zhan
- */
 public class HistogramAlphabet {
     
     private long total_alphabets = 0;
