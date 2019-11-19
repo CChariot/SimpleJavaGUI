@@ -10,10 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import java.util.Random;
 
-/**
- *
- * @author Admin
- */
 public class PieChart extends HistogramAlphabet{
     int n;
     float angle;
