@@ -9,11 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Lihan Zhan
- */
-
 public class Geometric_configuration extends Application{
 
     final double CanvasLength = 800;
