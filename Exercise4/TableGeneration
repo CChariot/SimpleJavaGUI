@@ -1,0 +1,159 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package databaseconnector;
+
+
+import java.sql.*;
+
+/**
+ *
+ * @author Lihan Zhan
+ */
+public class TableGeneration {
+    
+    //This method just creates the tables
+    static void createTables(Connection con) throws Exception
+    {
+        PreparedStatement s;
+        
+        //creating students table
+        //check is a constraint which is added to restrict the type of data that can be entered in the database
+        s = con.prepareStatement("create table Students(studentID int not null auto_increment primary key , first_name varchar(50) , last_name varchar(50) , sex varchar(1) check (sex in ('M' , 'F')));");
+        s.execute();
+        
+        //creating courses table
+        s = con.prepareStatement("create table Courses(courseID int not null primary key auto_increment , courseTitle varchar(50) , department varchar(50));");
+        s.execute();
+        
+        //creating classes table
+        //check is a constraint which is added to restrict the type of data that can be entered in the database
+        //Here the studentID should be unique and hence unique keyword is applied ot studentID field. The studentID should not be repeated in this table
+        s = con.prepareStatement("create table Classes(classCode int not null auto_increment primary key , courseID int references Courses(courseID) , studentID int unique references Students(studentID) , year int , semester varchar(10) check (semester in ('FALL' , 'SPRING' , 'SUMMER' , 'WINTER')), GPA varchar(1) check (GPA in ('A' , 'B' , 'C' , 'D' , 'F' , 'W')));");
+        s.execute();
+    }
+    
+    //This method is used for entering data into the students table
+    static void studentsInfo(Connection con) throws Exception
+    {
+        PreparedStatement s1;
+        String insertion;
+              
+        insertion = "insert into students(first_name , last_name , sex) values('RAHIL' , 'KHATRI' , 'M')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('RANDON' , 'CHARLES' , 'M')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('LISA' , 'SHAW' , 'F')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('BEN' , 'HAN' , 'M')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('AJAY' , 'PATEL' , 'M')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('PRIYA' , 'ROY' , 'F')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('SHREYA' , 'NAYAK' , 'F')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('RAHUL' , 'KHATWANI' , 'M')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+        
+        insertion = "insert into students(first_name , last_name , sex) values('PRIYA' , 'PATEL' , 'M')";
+        s1 = con.prepareStatement(insertion);
+        s1.executeUpdate();
+    }
+    
+    //This method is used for entering data in the courses table
+    static void coursesTable(Connection con) throws Exception 
+    {
+        PreparedStatement s;
+        String insertion;
+        
+        insertion = "insert into courses(courseTitle , department) values('CS211' , 'CS');";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into courses(courseTitle , department) values('CS222' , 'CS');";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into courses(courseTitle , department) values('ME311' , 'ME');";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into courses(courseTitle , department) values('EE332' , 'EE');";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into courses(courseTitle , department) values('CE221' , 'CE');";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into courses(courseTitle , department) values('ME233' , 'ME');";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into courses(courseTitle , department) values('EE322' , 'EE');";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+    }
+    
+    //This method is used for entering data in the classes table
+    static void classesTable(Connection con) throws Exception
+    {
+        String insertion;
+        PreparedStatement s;
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 3 , 2019 , 'FALL' , 'A')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(3 , 2 , 2018 , 'SPRING' , 'B')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 4 , 2019 , 'SUMMER' , 'C')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 1 , 2019 , 'FALL' , 'A')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(6 , 9 , 2017 , 'FALL' , 'W')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 5 , 2017 , 'SUMMER' , 'D')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(4 , 8 , 2016 , 'SPRING' , 'B')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 6 , 2019 , 'FALL' , 'F')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+        
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(7 , 7 , 2018 , 'SUMMER' , 'W')";
+        s = con.prepareStatement(insertion);
+        s.executeUpdate();
+    }
+    
+}
