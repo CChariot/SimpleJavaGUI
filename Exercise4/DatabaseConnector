@@ -1,36 +1,108 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package databaseconnector;
+
 import java.sql.*;
-//********************************************************************
-// DatabaseConnector.java Java Foundations
-//
-// Demonstrates the establishment of a JDBC connector.
-//********************************************************************
-public class DatabaseConnector
-{
-    //-----------------------------------------------------------------
-// Establishes the connection to the database and prints an
-// appropriate confirmation message.
-//-----------------------------------------------------------------
-    public static void main (String args[])
-    {
+import javafx.application.Application;
+import javafx.scene.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Lihan Zhan
+ */
+
+
+public class DatabaseConnector extends Application{
+
+    /**
+     * @param args the command line arguments
+     */
+    
+    static Connection con = null;
+    
+    public static void main(String[] args) {
+        // TODO code application logic here\
+             
+        
         try
         {
-            Connection conn = null;
-// Loads the class object for the mysql driver into the DriverManager.
             Class.forName("com.mysql.jdbc.Driver");
-// Attempt to establish a connection to the specified database via the
-// DriverManager
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/?user=root&password=336699qq");
-            if (conn != null)
+            
+            //user and password is also entered for logging in to the database
+            //This login condition varies from database to database
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/student" , "root" , "Wocaonimade123!");
+            
+            
+            PreparedStatement s = con.prepareStatement("drop table students, courses , classes");
+            s.executeUpdate();
+            
+            System.out.println("Creating tables...");
+            TableGeneration.createTables(con);
+            
+            System.out.println("Building courses table...");
+            TableGeneration.coursesTable(con);
+            
+            System.out.println("Buiding students table...");
+            TableGeneration.studentsInfo(con);
+            
+            System.out.println("Building classes table...");
+            TableGeneration.classesTable(con);
+
+            System.out.println("Database successfully built!");
+            
+            
+            //This what is asked in the exercise to display number of students with the given condition
+            System.out.println("Number of students enrolled in CSC211 in the Fall 2019 are");
+            PreparedStatement p = con.prepareStatement("select count(studentID) from classes natural join courses where year = 2019 and semester = 'Fall' and courseTitle = 'CS211'");
+            ResultSet r1 = p.executeQuery();
+            while(r1.next())
             {
-                System.out.println("We have connected to our database!");
-                conn.close();
+                System.out.println(r1.getInt("count(studentID)"));
             }
-        } catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
-            ex.printStackTrace();
-        } catch (Exception ex) {
-            System.out.println("Exception: " + ex.getMessage());
-            ex.printStackTrace();
+            launch(args);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception caught " + e);
         }
     }
+    
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception
+    {
+        VBox root = new VBox();
+        Scene scene1 = new Scene(root , 1000 , 1000);
+        
+        PieChart p = new PieChart(con);
+        for(int i=0; i<6; i++)
+        {
+            Text t = new Text();
+            root.getChildren().add(t);
+            t.setFill(Color.rgb(p.rgb[i][0] , p.rgb[i][1] , p.rgb[i][2]));
+            t.setFont(Font.font(20));
+            t.setText(p.gpa[i] + " - " + p.percentage[i] + "%");
+        }
+        
+        Canvas canvas = new Canvas(500 , 500);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        root.getChildren().add(canvas);
+        p.draw(gc);
+        
+        
+        primaryStage.setTitle("Pie Chart");
+        primaryStage.setScene(scene1);
+        primaryStage.show();
+    }
+    
 }
