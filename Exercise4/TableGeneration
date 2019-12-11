@@ -19,9 +19,9 @@ public class TableGeneration {
     {
         PreparedStatement s;
         
-        //creating students table
-        //check is a constraint which is added to restrict the type of data that can be entered in the database
-        s = con.prepareStatement("create table Students(studentID int not null auto_increment primary key , first_name varchar(50) , last_name varchar(50) , sex varchar(1) check (sex in ('M' , 'F')));");
+        //creating students table using SQL script.
+        //check constraint is added to restrict the type of data that can be entered in the database
+        s = con.prepareStatement("create table Students(studentID int not null primary key , first_name varchar(50) , last_name varchar(50) , sex varchar(1) check (sex in ('M' , 'F')));");
         s.execute();
         
         //creating courses table
@@ -41,39 +41,39 @@ public class TableGeneration {
         PreparedStatement s1;
         String insertion;
               
-        insertion = "insert into students(first_name , last_name , sex) values('RAHIL' , 'KHATRI' , 'M')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('23364902' , 'LIHAN' , 'ZHAN <-- ME' , 'M')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('RANDON' , 'CHARLES' , 'M')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('23364959' , 'JOHN' , 'TAN' , 'M')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('LISA' , 'SHAW' , 'F')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('23364906' , 'CHEN' , 'HONG' , 'F')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('BEN' , 'HAN' , 'M')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('2336' ,'    KOBE' , 'Bryant     ' , 'M')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('AJAY' , 'PATEL' , 'M')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('23364908' ,'AJAY' , 'PATEL' , 'M')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('PRIYA' , 'ROY' , 'F')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('23364909' ,'RUDY' , 'ROY' , 'F')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('SHREYA' , 'NAYAK' , 'F')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('23364910' ,'JOSH' , 'HART' , 'F')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('RAHUL' , 'KHATWANI' , 'M')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('2335' ,'    LEBRON' , 'JAMES      ' , 'M')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
         
-        insertion = "insert into students(first_name , last_name , sex) values('PRIYA' , 'PATEL' , 'M')";
+        insertion = "insert into students(studentID, first_name , last_name , sex) values('23364915' ,'PRIYA' , 'PATEL' , 'M')";
         s1 = con.prepareStatement(insertion);
         s1.executeUpdate();
     }
@@ -119,39 +119,39 @@ public class TableGeneration {
         String insertion;
         PreparedStatement s;
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 3 , 2019 , 'FALL' , 'A')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 23364902 , 2019 , 'FALL' , 'A')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(3 , 2 , 2018 , 'SPRING' , 'B')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(3 , 23364959 , 2018 , 'SPRING' , 'B')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 4 , 2019 , 'SUMMER' , 'C')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 23364906 , 2019 , 'SUMMER' , 'C')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 1 , 2019 , 'FALL' , 'A')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 2336 , 2019 , 'FALL' , 'A')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(6 , 9 , 2017 , 'FALL' , 'W')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(6 , 23364908 , 2017 , 'FALL' , 'W')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 5 , 2017 , 'SUMMER' , 'D')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 23364909 , 2017 , 'SUMMER' , 'D')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(4 , 8 , 2016 , 'SPRING' , 'B')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(4 , 23364910 , 2016 , 'SPRING' , 'B')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 6 , 2019 , 'FALL' , 'F')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(1 , 2335 , 2019 , 'FALL' , 'F')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
         
-        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(7 , 7 , 2018 , 'SUMMER' , 'W')";
+        insertion = "insert into classes(courseID , studentID , year , semester , GPA) values(7 , 23364915 , 2018 , 'SUMMER' , 'W')";
         s = con.prepareStatement(insertion);
         s.executeUpdate();
     }
