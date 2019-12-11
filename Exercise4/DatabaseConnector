@@ -69,6 +69,22 @@ public class DatabaseConnector extends Application{
             {
                 System.out.println(r1.getInt("count(studentID)"));
             }
+            
+            //This contains list of students who has cleared the desired conditions.
+            System.out.println("List of students :-");
+            PreparedStatement p1 = con.prepareStatement("select studentID , first_name , last_name, GPA from classes natural join courses natural join students where year = 2019 and semester = 'Fall' and courseTitle = 'CS211';");
+            ResultSet r2 = p1.executeQuery();
+            System.out.println("StudentID\t" + "First Name\t" + "Last Name\t\t" + "   GPA");
+            while(r2.next())
+            {
+                System.out.print(r2.getInt("studentID") + "\t\t");
+                System.out.print(r2.getString("first_name") + "\t\t");
+                System.out.print(r2.getString("last_name") + "\t\t");
+                System.out.print(r2.getString("GPA"));
+                
+                System.out.println();
+            }
+            
             launch(args);
         }
         catch(Exception e)
@@ -91,8 +107,14 @@ public class DatabaseConnector extends Application{
             root.getChildren().add(t);
             t.setFill(Color.rgb(p.rgb[i][0] , p.rgb[i][1] , p.rgb[i][2]));
             t.setFont(Font.font(20));
-            t.setText(p.gpa[i] + " - " + p.percentage[i] + "%");
+            t.setText(p.gpa[i] + " - " + p.count_gpa[i] + " - " + p.percentage[i] + "% Overall");
         }
+        
+        Text t = new Text();
+        root.getChildren().add(t);
+        t.setFill(Color.BLACK);
+        t.setFont(Font.font(20));
+        t.setText("Total students - " + p.no_of_students);
         
         Canvas canvas = new Canvas(500 , 500);
         GraphicsContext gc = canvas.getGraphicsContext2D();
