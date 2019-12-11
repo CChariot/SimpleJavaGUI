@@ -56,7 +56,7 @@ public class PieChart {
             
             int i = 0;
             //The below query gives the GPA along with the number of students having that GPA.
-            PreparedStatement p1 = con.prepareStatement("select count(studentID) , GPA from classes group by GPA");
+            PreparedStatement p1 = con.prepareStatement("select count(studentID) , GPA from classes group by GPA order by GPA");
             ResultSet r2 = p1.executeQuery();
             while(r2.next())
             {
